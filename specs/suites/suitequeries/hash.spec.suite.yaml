@@ -1,0 +1,62 @@
+meta:
+  name: Flujo Workspace - ENDPOINT - hash 
+configuration:
+  host: localhost
+  port: 3006
+  base_path: /api
+  scheme: http
+  
+specs:
+  - name: Se valida el resultado de la query de  hash - 200 SUCCESS
+  
+    request:
+      method: post
+      headers:
+        - name: content-type
+          value: application/json
+        - name: Authorization
+          value: Bearer eyJOeXAi0iJKV1QiLCJhbGciOUFUzI1NkstUiJ9.eyJpYXQi0jElODAyMjYONzEsImV4cCI6MTU4MDlyNjk3MS4xMTIslmIzcy161mRpZDpIdGhy0jB4REZBNTE4Y2VhRWQxYmZINmY3MDRFNTFBMThkNGJCMEExNDcxNGNkMiJ9.NdihoBy4uEMsCLaitRIETQ-fnB2SGJLyxfApked_42T9IZHJklcGRQmxwe0aer-UuG3A4R7-LOQYN76MivIQCgA
+
+        - name: Accept-Encoding
+          value: "gzip, deflate, br"
+          Accept: application/json
+          Connection: keep-alive
+          DNT: 1
+      payload:
+        body:
+          type: json
+          content:
+            query: >
+                  hash(did:"did:ethr:0xb9c5714089478a327f09197987f16f9e5d936e8a")
+            variables: null
+            operationName: null
+    response:
+      status_code: 200
+
+  - name: Se valida el resultado de la query de  hash - 400 BAD REQUEST
+  
+    request:
+      method: post
+      headers:
+        - name: content-type
+          value: application/json
+        - name: Authorization
+          value: Bearer ilk8mMsEiLhqsmwQEtGuAf4sr1gi5pqi1X8M4GHJ37SCLS32tNOHNQ
+        - name: Accept-Encoding
+          value: "gzip, deflate, br"
+          Accept: application/json
+          Connection: keep-alive
+          DNT: 1
+      payload:
+        body:
+          type: json
+          content:
+            query: >
+                  hash(did:"did:ethr:0xb9c5714089478a327f09197987f16f9e5d936e8a")
+            variables: null
+            operationName: null
+    response:
+      status_code: 400
+      json_data:
+        - path: $.errors[*].extensions.code
+          value: GRAPHQL_VALIDATION_FAILED

@@ -1,0 +1,31 @@
+{
+  "name": "didi-ssi-mouro-functional-test",
+  "version": "0.1.0",
+  "description": "Libreria automatizada para pruebas de llamados graphql del proyecto DIDI",
+  "main": "index.js",
+  "scripts": {
+    "test:all": "npm run test:queries && npm run test:mutations",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "pretty": "prettier --write",
+    "test:mutations": "./node_modules/.bin/just-api ./specs/suites/suitemutations",
+    "test:queries": "./node_modules/.bin/just-api ./specs/suites/suitequeries"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ong-bitcoin-argentina/DIDI-SSI-Mouro-functional-test.git"
+  },
+  "keywords": [
+    "graphql",
+    "just-api"
+  ],
+  "author": "Gaston Alejandro Genaud",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ong-bitcoin-argentina/DIDI-SSI-Mouro-functional-test/issues"
+  },
+  "homepage": "https://github.com/ong-bitcoin-argentina/DIDI-SSI-Mouro-functional-test#readme",
+  "dependencies": {
+    "just-api": "^1.2.5"
+  }
+}

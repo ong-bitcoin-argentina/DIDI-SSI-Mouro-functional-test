@@ -1,0 +1,93 @@
+meta:
+  name: Flujo LOGIN - ENDPOINT - removeEdge
+configuration:
+  host: localhost
+  port: 3006
+  base_path: /api
+  scheme: http
+  
+specs:
+  - name: Se valida el resultado de la query de removeEdge - 200 SUCCESS
+    request:
+      method: post
+      headers:
+        - name: content-type
+          value: application/json
+        - name: Authorization
+          value: S-N5sVnc0gEuwvsG_uUcU18sHTUFfqpR_sHv4eBodqy62hd0wMRXxA
+        - name: Accept-Encoding
+          value: "gzip, deflate, br"
+          Accept: application/json
+          Connection: keep-alive
+          DNT: 1
+      payload:
+        body:
+          type: json
+          content:
+            query: >
+                    mutation
+                    {removeEdge(hash:"", did: "did:ethr...")}
+            variables: null
+            operationName: null
+    response:
+      status_code: 200
+      json_data:
+        - path: $.data.removeEdge
+          value: "DONE"
+
+  - name: Se valida el resultado de la query de removeEdge 401 - UNAUTHORIZED [No Token]
+    request:
+      method: post
+      headers:
+        - name: content-type
+          value: application/json
+        - name: Accept-Encoding
+          value: "gzip, deflate, br"
+        - name: Accept
+          value: application/json
+        - name: Connection
+          value: keep-alive
+        - name: DNT
+          value: 1
+      payload:
+        body:
+          type: json
+          content:
+            query: >
+                   mutation
+                    {removeEdge(hash:"", did: "did:ethr...")}
+            variables: null
+            operationName: null
+    response:
+      status_code: 401
+      json_data:
+        - path: $.message
+          value: UNAUTHORIZED [No Token]
+
+  - name: Se valida el resultado de la query de removeEdge 400 - BAD REQUEST
+    request:
+      method: post
+      headers:
+        - name: content-type
+          value: application/json
+        - name: Authorization
+          value: ilk8mMsEiLhqsmwQEtGuAf4sr1gi5pqi1X8M4GHJ37SCLS32tNOHNQ
+        - name: Accept-Encoding
+          value: "gzip, deflate, br"
+          Accept: application/json
+          Connection: keep-alive
+          DNT: 1
+      payload:
+        body:
+          type: json
+          content:
+            query: >
+                    mutation
+                    {removeEdge(hash:"", did: "did:ethr...")}
+            variables: null
+            operationName: null
+    response:
+      status_code: 400
+      json_data:
+        - path: $.errors[*].extensions.code
+          value: GRAPHQL_VALIDATION_FAILED

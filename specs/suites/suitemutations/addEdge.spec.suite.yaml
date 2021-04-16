@@ -1,0 +1,66 @@
+meta:
+  name: Flujo Workspace - ENDPOINT - addEdge 
+configuration:
+  host: localhost
+  port: 3006
+  base_path: /api
+  scheme: http
+  
+specs:
+  - name: Se valida el resultado de la query de addEdge - 200 SUCCESS
+  
+    request:
+      method: post
+      headers:
+        - name: content-type
+          value: application/json
+        - name: Authorization
+          value: ilk8mMsEiLhqsmwQEtGuAf4sr1gi5pqi1X8M4GHJ37SCLS32tNOHNQ
+        - name: Accept-Encoding
+          value: "gzip, deflate, br"
+          Accept: application/json
+          Connection: keep-alive
+          DNT: 1
+      payload:
+        body:
+          type: json
+          content:
+            query: >
+                    mutation {
+                      addEdge(edgeJWT: "...", did:"did:ethr..."){jwt, hash}}
+            variables: null
+            operationName: null
+    response:
+      status_code: 200
+      json_data:
+        - path: $.data.addLocations
+          value: "DONE"
+
+  - name: Se valida el resultado de la query de addEdge - 400 BAD REQUEST
+  
+    request:
+      method: post
+      headers:
+        - name: content-type
+          value: application/json
+        - name: Authorization
+          value: ilk8mMsEiLhqsmwQEtGuAf4sr1gi5pqi1X8M4GHJ37SCLS32tNOHNQ
+        - name: Accept-Encoding
+          value: "gzip, deflate, br"
+          Accept: application/json
+          Connection: keep-alive
+          DNT: 1
+      payload:
+        body:
+          type: json
+          content:
+            query: >
+                    mutation {
+                      addEdge(edgeJWT: "...", did:"did:ethr..."){jwt, hash}}
+            variables: null
+            operationName: null
+    response:
+      status_code: 400
+      json_data:
+        - path: $.errors[*].extensions.code
+          value: GRAPHQL_VALIDATION_FAILED
